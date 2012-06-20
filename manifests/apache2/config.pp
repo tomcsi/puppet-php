@@ -25,4 +25,13 @@ class php::apache2::config {
         source  => $php::apache2::apache2_ini_source,
         ensure  => file,
     }
+    
+    if is_array(hiera('php_ini_settings_apache', [])) {
+      augeas {
+        'php ini settings for apache2':
+          context => "/files$php::params::apache_ini}",
+          changes => hiera_array('php_ini_settings_apache'),
+          notify => Service['httpd']
+      }
+    }
 }

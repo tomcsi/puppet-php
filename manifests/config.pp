@@ -12,7 +12,7 @@ class php::config {
     file { $php::params::conf_dir:
         owner   => root,
         group   => root,
-        purge   => true,
+        purge   => false,
         recurse => true,
         force   => true,
         require => Class["php::install"],
